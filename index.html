@@ -177,8 +177,13 @@
 <h4 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h4><p>新建repository，konglinxi.github.io，安装<a target="_blank" rel="noopener" href="https://www.git-scm.com/download/win">git</a>并设置邮箱以及用户名。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置邮箱以及用户名</span></span><br><span class="line">git config --global user.email “you@example.com”</span><br><span class="line">git config --global user.name “Your Name”</span><br><span class="line"><span class="comment"># 安装部署插件</span></span><br><span class="line">cnpm install --save hexo-deployer-git </span><br></pre></td></tr></table></figure>
 
-<p>修改_config.yml最后内容:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/konglinxi/konglinxi.github.io</span><br><span class="line">  branch: master</span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>添加SSH Key。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> .ssh/ <span class="comment">#usr/yourName</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;you@example.com&quot;</span> <span class="comment">#修改为个人邮箱</span></span><br></pre></td></tr></table></figure>
+
+<p>成功后会生成两个文件id_rsa 以及id_rsa.pub在.ssh文件夹中， 复制id_rsa内容到github new SSH Key。</p>
+<p><img src="C:\Users\54456\AppData\Roaming\Typora\typora-user-images\image-20200824160432656.png" alt="image-20200824160432656"></p>
+<p>最后修改_config.yml最后内容:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:konglinxi/konglinxi.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
       
 
