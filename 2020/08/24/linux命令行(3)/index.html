@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>linux命令行(4) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="进程管理stress (给系统增加负载或者进行压力测试) -t&#x2F;–timeout N  # N秒后超时-c&#x2F;–cpu N      # 孵化N个worker， 死循环sqrt() &#x2F; CPU-i&#x2F;–io N       # 孵化N个worker， 死循环sync() &#x2F; IO-m&#x2F;–vm N       # 孵化N个worker， 死循环malloc() &#x2F; free() &#x2F; Memory-d&#x2F;–">
+  <meta name="description" content="进程管理1. stress (给系统增加负载或者进行压力测试) -t&#x2F;–timeout N  # N秒后超时-c&#x2F;–cpu N      # 孵化N个worker， 死循环sqrt() &#x2F; CPU-i&#x2F;–io N       # 孵化N个worker， 死循环sync() &#x2F; IO-m&#x2F;–vm N       # 孵化N个worker， 死循环malloc() &#x2F; free() &#x2F; Memory-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux命令行(4)">
 <meta property="og:url" content="http://yoursite.com/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="进程管理stress (给系统增加负载或者进行压力测试) -t&#x2F;–timeout N  # N秒后超时-c&#x2F;–cpu N      # 孵化N个worker， 死循环sqrt() &#x2F; CPU-i&#x2F;–io N       # 孵化N个worker， 死循环sync() &#x2F; IO-m&#x2F;–vm N       # 孵化N个worker， 死循环malloc() &#x2F; free() &#x2F; Memory-d&#x2F;–">
+<meta property="og:description" content="进程管理1. stress (给系统增加负载或者进行压力测试) -t&#x2F;–timeout N  # N秒后超时-c&#x2F;–cpu N      # 孵化N个worker， 死循环sqrt() &#x2F; CPU-i&#x2F;–io N       # 孵化N个worker， 死循环sync() &#x2F; IO-m&#x2F;–vm N       # 孵化N个worker， 死循环malloc() &#x2F; free() &#x2F; Memory-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-24T14:17:56.383Z">
-<meta property="article:modified_time" content="2020-08-24T14:58:34.579Z">
+<meta property="article:modified_time" content="2020-08-25T03:38:44.227Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -175,16 +175,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h4 id="stress-给系统增加负载或者进行压力测试"><a href="#stress-给系统增加负载或者进行压力测试" class="headerlink" title="stress (给系统增加负载或者进行压力测试)"></a>stress (给系统增加负载或者进行压力测试)</h4><blockquote>
+        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h4 id="1-stress-给系统增加负载或者进行压力测试"><a href="#1-stress-给系统增加负载或者进行压力测试" class="headerlink" title="1. stress (给系统增加负载或者进行压力测试)"></a>1. stress (给系统增加负载或者进行压力测试)</h4><blockquote>
 <p>-t/–timeout N  # N秒后超时<br>-c/–cpu N      # 孵化N个worker， 死循环sqrt() / CPU<br>-i/–io N       # 孵化N个worker， 死循环sync() / IO<br>-m/–vm N       # 孵化N个worker， 死循环malloc() / free() / Memory<br>-d/–hdd N      # 孵化N个worker， 死循环write() / unlink() / Disk</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例</span></span><br><span class="line">stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="top-显示或更新排序过的进程信息"><a href="#top-显示或更新排序过的进程信息" class="headerlink" title="top (显示或更新排序过的进程信息)"></a>top (显示或更新排序过的进程信息)</h4><p>默认按照cpu占用率排序</p>
-<h4 id="ps-process-status"><a href="#ps-process-status" class="headerlink" title="ps (process status)"></a>ps (process status)</h4><p>列出当前所有进程，默认只显示当前用户有控制终端的进程。  </p>
+<h4 id="2-top-显示或更新排序过的进程信息"><a href="#2-top-显示或更新排序过的进程信息" class="headerlink" title="2. top (显示或更新排序过的进程信息)"></a>2. top (显示或更新排序过的进程信息)</h4><p>默认按照cpu占用率排序</p>
+<h4 id="3-ps-process-status"><a href="#3-ps-process-status" class="headerlink" title="3. ps (process status)"></a>3. ps (process status)</h4><p>列出当前所有进程，默认只显示当前用户有控制终端的进程。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux <span class="comment"># 显示当前所有进程，包括其他用户的</span></span><br><span class="line">$ ps aux | grep -i chrome | wc -l <span class="comment"># 看一看Chrome起了多少个进程</span></span><br><span class="line">$ ps -l <span class="comment"># 列出PPID等</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-kill-amp-killall"><a href="#4-kill-amp-killall" class="headerlink" title="4. kill &amp; killall"></a>4. kill &amp; killall</h4><p>(1) kill  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> -signal-number/-signal_name PID</span><br><span class="line">$ <span class="built_in">kill</span> PID <span class="comment"># 默认发送15/TERM(software termination signal)</span></span><br><span class="line">$ <span class="built_in">kill</span> -9/-KILL PID <span class="comment"># 强力杀进程</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) killall (按照名字杀进程)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ killall stress</span><br><span class="line">$ killall python <span class="comment"># 名字常见可能误伤</span></span><br></pre></td></tr></table></figure>
       
 
       

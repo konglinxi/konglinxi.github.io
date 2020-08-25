@@ -172,16 +172,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h4 id="stress-给系统增加负载或者进行压力测试"><a href="#stress-给系统增加负载或者进行压力测试" class="headerlink" title="stress (给系统增加负载或者进行压力测试)"></a>stress (给系统增加负载或者进行压力测试)</h4><blockquote>
+        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h4 id="1-stress-给系统增加负载或者进行压力测试"><a href="#1-stress-给系统增加负载或者进行压力测试" class="headerlink" title="1. stress (给系统增加负载或者进行压力测试)"></a>1. stress (给系统增加负载或者进行压力测试)</h4><blockquote>
 <p>-t/–timeout N  # N秒后超时<br>-c/–cpu N      # 孵化N个worker， 死循环sqrt() / CPU<br>-i/–io N       # 孵化N个worker， 死循环sync() / IO<br>-m/–vm N       # 孵化N个worker， 死循环malloc() / free() / Memory<br>-d/–hdd N      # 孵化N个worker， 死循环write() / unlink() / Disk</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例</span></span><br><span class="line">stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="top-显示或更新排序过的进程信息"><a href="#top-显示或更新排序过的进程信息" class="headerlink" title="top (显示或更新排序过的进程信息)"></a>top (显示或更新排序过的进程信息)</h4><p>默认按照cpu占用率排序</p>
-<h4 id="ps-process-status"><a href="#ps-process-status" class="headerlink" title="ps (process status)"></a>ps (process status)</h4><p>列出当前所有进程，默认只显示当前用户有控制终端的进程。  </p>
+<h4 id="2-top-显示或更新排序过的进程信息"><a href="#2-top-显示或更新排序过的进程信息" class="headerlink" title="2. top (显示或更新排序过的进程信息)"></a>2. top (显示或更新排序过的进程信息)</h4><p>默认按照cpu占用率排序</p>
+<h4 id="3-ps-process-status"><a href="#3-ps-process-status" class="headerlink" title="3. ps (process status)"></a>3. ps (process status)</h4><p>列出当前所有进程，默认只显示当前用户有控制终端的进程。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux <span class="comment"># 显示当前所有进程，包括其他用户的</span></span><br><span class="line">$ ps aux | grep -i chrome | wc -l <span class="comment"># 看一看Chrome起了多少个进程</span></span><br><span class="line">$ ps -l <span class="comment"># 列出PPID等</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-kill-amp-killall"><a href="#4-kill-amp-killall" class="headerlink" title="4. kill &amp; killall"></a>4. kill &amp; killall</h4><p>(1) kill  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> -signal-number/-signal_name PID</span><br><span class="line">$ <span class="built_in">kill</span> PID <span class="comment"># 默认发送15/TERM(software termination signal)</span></span><br><span class="line">$ <span class="built_in">kill</span> -9/-KILL PID <span class="comment"># 强力杀进程</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) killall (按照名字杀进程)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ killall stress</span><br><span class="line">$ killall python <span class="comment"># 名字常见可能误伤</span></span><br></pre></td></tr></table></figure>
       
 
       
@@ -254,37 +261,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><h4 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h4><ol>
-<li><p>python脚本</p>
+        <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><h4 id="1-栗子"><a href="#1-栗子" class="headerlink" title="1. 栗子"></a>1. 栗子</h4><p>(1) python脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br><span class="line"></span><br><span class="line">$ python3 my_echo.py hello world!</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>向python脚本添加指定解释器</p>
+
+<p>(2) 向python脚本添加指定解释器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line"><span class="meta">#!/usr/bin/env python3</span></span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他操作</p>
+
+<p>(3) 其他操作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x my_echo.py <span class="comment"># 增加可执行权限</span></span><br><span class="line">$ ./my_echo.py hello world! <span class="comment"># 运行脚本</span></span><br><span class="line">hello world!</span><br><span class="line"></span><br><span class="line">$ mv my_echo.py my_echo <span class="comment"># 移动文件（改名）</span></span><br><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span> <span class="comment"># 将当前路径添加到系统路径</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">which</span> my_echo <span class="comment"># 查找my_echo位置</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h4 id="usr-bin-env-python3"><a href="#usr-bin-env-python3" class="headerlink" title="#!/usr/bin/env python3"></a>#!/usr/bin/env python3</h4><ol>
-<li>Shebang: #! 使用哪个解释器解释脚本，放在第一行，并且是绝对路径<blockquote>
+<h4 id="2-usr-bin-env-python3"><a href="#2-usr-bin-env-python3" class="headerlink" title="2. #!/usr/bin/env python3"></a>2. #!/usr/bin/env python3</h4><p>(1) Shebang: #! 使用哪个解释器解释脚本，放在第一行，并且是绝对路径</p>
+<blockquote>
 <p>#!/bin/sh<br>#!/bin/bash<br>#!/usr/bin/perl<br>#!/usr/bin/php  </p>
 </blockquote>
-</li>
-</ol>
-<ol start="2">
-<li>chmod (change mode)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x foo <span class="comment"># 添加可执行权限</span></span><br><span class="line">$ chmod -x foo <span class="comment"># 移除可执行权限</span></span><br><span class="line">$ chmod 740 foo <span class="comment"># 修改可执行权限为740  </span></span><br><span class="line"></span><br><span class="line">  common：  </span><br><span class="line">  644 -rw-r--r--  <span class="comment"># default  </span></span><br><span class="line">  755 -rwx-xr-x  </span><br><span class="line">  777 -rwxrwxrwx  <span class="comment"># 危险！use chown/chgrp instead</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 文件基本操作</span></span><br><span class="line">1. mv (move -- 重命名， 剪切+粘贴)</span><br><span class="line">```bash</span><br><span class="line">$ mv hell.txt hello.txt <span class="comment"># 重命名</span></span><br><span class="line">$ mv toffel /english/ <span class="comment"># 移动文件夹</span></span><br></pre></td></tr></table></figure></li>
-<li>cp (copy – 复制)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp -r dir1 dir2 <span class="comment"># 复制文件夹</span></span><br></pre></td></tr></table></figure></li>
-<li>rm(remove – 没有回收站)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -r dir <span class="comment"># 删除文件夹</span></span><br></pre></td></tr></table></figure>
+<p>(2) chmod (change mode)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x foo <span class="comment"># 添加可执行权限</span></span><br><span class="line">$ chmod -x foo <span class="comment"># 移除可执行权限</span></span><br><span class="line">$ chmod 740 foo <span class="comment"># 修改可执行权限为740  </span></span><br><span class="line"></span><br><span class="line">  common：  </span><br><span class="line">  644 -rw-r--r--  <span class="comment"># default  </span></span><br><span class="line">  755 -rwx-xr-x  </span><br><span class="line">  777 -rwxrwxrwx  <span class="comment"># 危险！use chown/chgrp instead</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 3. 文件基本操作</span></span><br><span class="line">(1) mv (move -- 重命名， 剪切+粘贴)</span><br><span class="line">```bash</span><br><span class="line">$ mv hell.txt hello.txt <span class="comment"># 重命名</span></span><br><span class="line">$ mv toffel /english/ <span class="comment"># 移动文件夹</span></span><br></pre></td></tr></table></figure>
+<p>(2) cp (copy – 复制)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp -r dir1 dir2 <span class="comment"># 复制文件夹</span></span><br></pre></td></tr></table></figure>
+<p>(3) rm(remove – 没有回收站)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -r dir <span class="comment"># 删除文件夹</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h4 id="PATH"><a href="#PATH" class="headerlink" title="$PATH"></a>$PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-PATH"><a href="#4-PATH" class="headerlink" title="4. $PATH"></a>4. $PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>which: locate a program file in user’s path</p>
 </blockquote>
-<h4 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes <span class="comment"># 一直输出yes</span></span><br><span class="line">$ yes | sudo spt-get install ... <span class="comment"># 跳过用户确认</span></span><br></pre></td></tr></table></figure>
-
+<h4 id="5-娱乐"><a href="#5-娱乐" class="headerlink" title="5. 娱乐"></a>5. 娱乐</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes <span class="comment"># 一直输出yes</span></span><br><span class="line">$ yes | sudo spt-get install ... <span class="comment"># 跳过用户确认</span></span><br></pre></td></tr></table></figure>
 
       
 
