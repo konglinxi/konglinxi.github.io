@@ -16,7 +16,7 @@
 <meta property="og:description" content="进程管理1. stress (给系统增加负载或者进行压力测试) -t&#x2F;–timeout N  # N秒后超时-c&#x2F;–cpu N      # 孵化N个worker， 死循环sqrt() &#x2F; CPU-i&#x2F;–io N       # 孵化N个worker， 死循环sync() &#x2F; IO-m&#x2F;–vm N       # 孵化N个worker， 死循环malloc() &#x2F; free() &#x2F; Memory-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-24T14:17:56.383Z">
-<meta property="article:modified_time" content="2020-08-25T03:38:44.227Z">
+<meta property="article:modified_time" content="2020-08-25T04:14:19.312Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -192,6 +192,20 @@
 
 <p>(2) killall (按照名字杀进程)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ killall stress</span><br><span class="line">$ killall python <span class="comment"># 名字常见可能误伤</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="5-Ctrl-C-vs-Ctrl-Z"><a href="#5-Ctrl-C-vs-Ctrl-Z" class="headerlink" title="5. Ctrl+C vs Ctrl+Z"></a>5. Ctrl+C vs Ctrl+Z</h4><p>都能让程序“停止”，但Ctrl+C向进程发送SIGINT中断信号，通常进程会终止；Ctrl+Z向进程发送SIGTSTP信号，把前台进程放入后台并挂起，此时：（1）进程仍然存在（2）打开的端口还会被占用</p>
+<h4 id="6-amp-jobs-fg-foreground-bg-background"><a href="#6-amp-jobs-fg-foreground-bg-background" class="headerlink" title="6. &amp; / jobs / fg (foreground) / bg (background)"></a>6. &amp; / jobs / fg (foreground) / bg (background)</h4><p>(1) &amp; (在后台运行进程)   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m http.server &amp; <span class="comment"># 在后台起一个web server</span></span><br></pre></td></tr></table></figure>
+<p>(2) jobs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">jobs</span> <span class="comment"># 显示从当前终端启动的命令</span></span><br><span class="line">$ <span class="built_in">jobs</span> -l <span class="comment"># 显示PID</span></span><br></pre></td></tr></table></figure>
+<p>(3) fg (foreground)  </p>
+<pre><code class="bash">$ fg %1 # 把job1号放到前台开始运行</code></pre>
+<p>(4) bg (background) </p>
+<pre><code class="bash">$ stress -c 1
+$ Ctrl+Z # 挂起当前进程放入后台
+$ bg # 继续被挂起的后台进程</code></pre>
+
       
 
       
