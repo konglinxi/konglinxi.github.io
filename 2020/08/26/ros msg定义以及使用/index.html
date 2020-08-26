@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ROS msg 定义以及使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 human_xuint16 human_y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation12345find_package(catkin REQUIRED">
+  <meta name="description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 human_xuint16 human_y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation123456find_package(catkin REQUIRE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ROS msg 定义以及使用">
 <meta property="og:url" content="http://yoursite.com/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 human_xuint16 human_y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation12345find_package(catkin REQUIRED">
+<meta property="og:description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 human_xuint16 human_y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation123456find_package(catkin REQUIRE">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-26T08:53:06.140Z">
-<meta property="article:modified_time" content="2020-08-26T09:13:06.226Z">
+<meta property="article:modified_time" content="2020-08-26T10:01:19.955Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="ros">
 <meta name="twitter:card" content="summary">
@@ -179,7 +179,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uint32 frame_id</span><br><span class="line">uint16 human_x</span><br><span class="line">uint16 human_y</span><br></pre></td></tr></table></figure>
 
 <h4 id="CMakeLists-txt-修改"><a href="#CMakeLists-txt-修改" class="headerlink" title="CMakeLists.txt 修改"></a>CMakeLists.txt 修改</h4><ol>
-<li>首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS </span><br><span class="line">  roscpp </span><br><span class="line">  rospy</span><br><span class="line">  std_msgs </span><br><span class="line">  genmsg)</span><br></pre></td></tr></table></figure></li>
+<li>首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS </span><br><span class="line">  roscpp </span><br><span class="line">  rospy</span><br><span class="line">  std_msgs </span><br><span class="line">  genmsg</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
 <li>然后是add_message_files，指定msg文件<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_message_files(</span><br><span class="line">  DIRECTORY</span><br><span class="line">  msg</span><br><span class="line">  FILES</span><br><span class="line">  msg_name.msg</span><br><span class="line">  <span class="comment"># Message2.msg</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
 <li>然后是generate_messages，指定生成消息文件时的依赖项<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">generate_messages(</span><br><span class="line">  DEPENDENCIES</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
 <li>然后是catkin_package设置运行依赖<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">catkin_package(</span><br><span class="line">  CATKIN_DEPENDS message_runtime</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
