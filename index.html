@@ -152,6 +152,224 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ros msg定义以及使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/">ROS msg 定义以及使用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-08-26T08:53:06.140Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="msg-定义"><a href="#msg-定义" class="headerlink" title="msg 定义"></a>msg 定义</h4><p>例，在ros包中创建msg文件夹，定义msg_name.msg文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uint32 frame_id</span><br><span class="line">uint16 human_x</span><br><span class="line">uint16 human_y</span><br></pre></td></tr></table></figure>
+
+<h4 id="CMakeLists-txt-修改"><a href="#CMakeLists-txt-修改" class="headerlink" title="CMakeLists.txt 修改"></a>CMakeLists.txt 修改</h4><ol>
+<li>首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS </span><br><span class="line">  roscpp </span><br><span class="line">  rospy</span><br><span class="line">  std_msgs </span><br><span class="line">  genmsg)</span><br></pre></td></tr></table></figure></li>
+<li>然后是add_message_files，指定msg文件<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_message_files(</span><br><span class="line">  DIRECTORY</span><br><span class="line">  msg</span><br><span class="line">  FILES</span><br><span class="line">  msg_name.msg</span><br><span class="line">  <span class="comment"># Message2.msg</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li>然后是generate_messages，指定生成消息文件时的依赖项<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">generate_messages(</span><br><span class="line">  DEPENDENCIES</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li>然后是catkin_package设置运行依赖<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">catkin_package(</span><br><span class="line">  CATKIN_DEPENDS message_runtime</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="package-xml-修改"><a href="#package-xml-修改" class="headerlink" title="package.xml 修改"></a>package.xml 修改</h4><p>接下来需要message_generation生成C++或Python能使用的代码，需要message_runtime提供运行时的支持，所以package.xml中添加以下三句</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">run_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">run_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="msg使用"><a href="#msg使用" class="headerlink" title="msg使用"></a>msg使用</h4><p>编译包后新的msg类型pkg_name/msg_name就可以使用了，利用rosmsg show指令查看其内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rosmsg show pkg_name/msg_name</span><br><span class="line">uint32 frame_id</span><br><span class="line">uint16 human_x</span><br><span class="line">uint16 human_y</span><br></pre></td></tr></table></figure>
+
+<p>其他包的调用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pkg_name/msg_name.h&gt;</span></span></span><br><span class="line">pkg_name::msg_name msg;</span><br></pre></td></tr></table></figure>
+<p>修改package.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>test_msgs<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">run_depend</span>&gt;</span>test_msgs<span class="tag">&lt;/<span class="name">run_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  msg_name</span><br><span class="line">)</span><br><span class="line"><span class="keyword">add_dependencies</span>(project_name msg_name_gencpp)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ros</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux命令行(4)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/26/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(4)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode_17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/26/leetcode_17/">Leetcode_17</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/26/leetcode_17/" class="archive-article-date">
+  	<time datetime="2020-08-26T03:56:09.079Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<h4 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">letterCombinations</span><span class="params">(<span class="built_in">string</span> digits)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> n = digits.length();</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">        dfs(digits, <span class="number">0</span>, digits.length(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ans;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>,<span class="built_in">string</span>&gt; m_&#123;&#123;<span class="string">&#x27;2&#x27;</span>,<span class="string">&quot;abc&quot;</span>&#125;, &#123;<span class="string">&#x27;3&#x27;</span>,<span class="string">&quot;def&quot;</span>&#125;, &#123;<span class="string">&#x27;4&#x27;</span>,<span class="string">&quot;ghi&quot;</span>&#125;, &#123;<span class="string">&#x27;5&#x27;</span>,<span class="string">&quot;jkl&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;6&#x27;</span>,<span class="string">&quot;mno&quot;</span>&#125;, &#123;<span class="string">&#x27;7&#x27;</span>,<span class="string">&quot;pqrs&quot;</span>&#125;, &#123;<span class="string">&#x27;8&#x27;</span>,<span class="string">&quot;tuv&quot;</span>&#125;, &#123;<span class="string">&#x27;9&#x27;</span>,<span class="string">&quot;wxyz&quot;</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">string</span> digits, <span class="keyword">int</span> l, <span class="keyword">int</span> n, <span class="built_in">string</span> cur)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == n) &#123;</span><br><span class="line">            ans.push_back(cur);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">char</span> a = digits[l];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : m_[a]) &#123;</span><br><span class="line">            dfs(digits, l+<span class="number">1</span>, n, cur+c);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/26/leetcode_17/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode_684" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -780,6 +998,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ros</a>
               </li>
             
             <div class="clearfix"></div>
