@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ROS msg 定义以及使用 | Hexo</title>
+  <title>Union Find 类 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 xuint16 y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation123456find_package(catkin REQUIRED COMPONENTS">
+  <meta name="description" content="Union_Find class UnionFind &amp;#123; public:     UnionFind(int n) &amp;#123;         ranks_ &#x3D; vector&lt;int&gt;(n+1, 0);         parents_ &#x3D; vector&lt;int&gt;(n+1, 0);          for(int i &#x3D; 0; i &lt; n; ++i)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ROS msg 定义以及使用">
-<meta property="og:url" content="http://yoursite.com/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="Union Find 类">
+<meta property="og:url" content="http://yoursite.com/2020/08/27/UnionFind/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="msg 定义例，在ros包中创建msg文件夹，定义msg_name.msg文件如下： 123uint32 frame_iduint16 xuint16 y  CMakeLists.txt 修改 首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation123456find_package(catkin REQUIRED COMPONENTS">
+<meta property="og:description" content="Union_Find class UnionFind &amp;#123; public:     UnionFind(int n) &amp;#123;         ranks_ &#x3D; vector&lt;int&gt;(n+1, 0);         parents_ &#x3D; vector&lt;int&gt;(n+1, 0);          for(int i &#x3D; 0; i &lt; n; ++i)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-26T08:53:06.140Z">
-<meta property="article:modified_time" content="2020-08-26T10:39:57.899Z">
+<meta property="article:published_time" content="2020-08-27T04:49:38.380Z">
+<meta property="article:modified_time" content="2020-08-27T05:09:25.657Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="ros">
+<meta property="article:tag" content="Leetcode">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -155,49 +155,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ros msg定义以及使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-UnionFind" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ROS msg 定义以及使用
+      Union Find 类
     </h1>
   
 
         
-        <a href="/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-08-26T08:53:06.140Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-26</time>
+        <a href="/2020/08/27/UnionFind/" class="archive-article-date">
+  	<time datetime="2020-08-27T04:49:38.380Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="msg-定义"><a href="#msg-定义" class="headerlink" title="msg 定义"></a>msg 定义</h4><p>例，在ros包中创建msg文件夹，定义msg_name.msg文件如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uint32 frame_id</span><br><span class="line">uint16 x</span><br><span class="line">uint16 y</span><br></pre></td></tr></table></figure>
+        <h4 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union_Find"></a>Union_Find</h4><pre><code class="c++">
+class UnionFind &#123;
+public:
+    UnionFind(int n) &#123;
+        ranks_ = vector&lt;int&gt;(n+1, 0);
+        parents_ = vector&lt;int&gt;(n+1, 0);
 
-<h4 id="CMakeLists-txt-修改"><a href="#CMakeLists-txt-修改" class="headerlink" title="CMakeLists.txt 修改"></a>CMakeLists.txt 修改</h4><ol>
-<li>首先调用find_package查找依赖的包，必备的有roscpp rospy message_generation<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS </span><br><span class="line">  roscpp </span><br><span class="line">  rospy</span><br><span class="line">  std_msgs </span><br><span class="line">  genmsg</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-<li>然后是add_message_files，指定msg文件<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_message_files(</span><br><span class="line">  DIRECTORY</span><br><span class="line">  msg</span><br><span class="line">  FILES</span><br><span class="line">  msg_name.msg</span><br><span class="line">  <span class="comment"># Message2.msg</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-<li>然后是generate_messages，指定生成消息文件时的依赖项<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">generate_messages(</span><br><span class="line">  DEPENDENCIES</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-<li>然后是catkin_package设置运行依赖<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">catkin_package(</span><br><span class="line">  CATKIN_DEPENDS message_runtime</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+        for(int i = 0; i &lt; n; ++i)
+            parents_[i] = i;
+    &#125;
 
-</li>
-</ol>
-<h4 id="package-xml-修改"><a href="#package-xml-修改" class="headerlink" title="package.xml 修改"></a>package.xml 修改</h4><p>接下来需要message_generation生成C++或Python能使用的代码，需要message_runtime提供运行时的支持，所以package.xml中添加以下三句</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">run_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">run_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    bool Union(int u, int v) &#123;
+        int pu = Find(u);
+        int pv = Find(v);
+        if(pu == pv) return false;
+        if(ranks_[pu] &gt; ranks_[pv])
+            parents_[pv] = pu;
+        else if(ranks_[pu] &lt; ranks_[pv])
+            parents_[pu] = pv;
+        else &#123;
+            parents_[pv] = pu;
+            ranks_[pu] += 1;
+        &#125;
+        return true;
+    &#125;
 
-<h4 id="msg使用"><a href="#msg使用" class="headerlink" title="msg使用"></a>msg使用</h4><p>编译包后新的msg类型pkg_name/msg_name就可以使用了，利用rosmsg show指令查看其内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rosmsg show pkg_name/msg_name</span><br><span class="line">uint32 frame_id</span><br><span class="line">uint16 human_x</span><br><span class="line">uint16 human_y</span><br></pre></td></tr></table></figure>
+    int Find(int u) &#123;
+        if(u != parents_[u])
+            parents_[u] = Find(parents_[u]);
+        return parents_[u];
+    &#125;
 
-<p>其他包的调用</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pkg_name/msg_name.h&gt;</span></span></span><br><span class="line">pkg_name::msg_name msg;</span><br></pre></td></tr></table></figure>
-<p>修改package.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>pkg_name<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">run_depend</span>&gt;</span>pkg_name<span class="tag">&lt;/<span class="name">run_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>修改CMakeLists.txt</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  msg_name</span><br><span class="line">)</span><br><span class="line"><span class="keyword">add_dependencies</span>(project_name msg_name_gencpp)</span><br></pre></td></tr></table></figure>
+private:
+    vector&lt;int&gt; parents_;
+    vector&lt;int&gt; ranks_;
+&#125;;
+
+</code></pre>
 
       
 
@@ -232,7 +247,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ros</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		
 		</ul>
@@ -288,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/26/ros%20msg%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/27/UnionFind/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/08/27/leetcode_547/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          leetcode_547 Friend Circles
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/08/26/leetcode_17/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_17</div>
+    <a href="/2020/08/27/leetcode_547/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode_547 Friend Circles</div>
       <i class="icon-circle-right"></i>
     </a>
   
