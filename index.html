@@ -172,42 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union_Find"></a>Union_Find</h4><pre><code class="c++">class UnionFind &#123;
-public:
-    UnionFind(int n) &#123;
-        ranks_ = vector&lt;int&gt;(n+1, 0);
-        parents_ = vector&lt;int&gt;(n+1, 0);
-
-        for(int i = 0; i &lt; n; ++i)
-            parents_[i] = i;
-    &#125;
-
-    bool Union(int u, int v) &#123;
-        int pu = Find(u);
-        int pv = Find(v);
-        if(pu == pv) return false;
-        if(ranks_[pu] &gt; ranks_[pv])
-            parents_[pv] = pu;
-        else if(ranks_[pu] &lt; ranks_[pv])
-            parents_[pu] = pv;
-        else &#123;
-            parents_[pv] = pu;
-            ranks_[pu] += 1;
-        &#125;
-        return true;
-    &#125;
-
-    int Find(int u) &#123;
-        if(u != parents_[u])
-            parents_[u] = Find(parents_[u]);
-        return parents_[u];
-    &#125;
-
-private:
-    vector&lt;int&gt; parents_;
-    vector&lt;int&gt; ranks_;
-&#125;;</code></pre>
-
+        <h4 id="Union-Find"><a href="#Union-Find" class="headerlink" title="Union_Find"></a>Union_Find</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    UnionFind(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        ranks_ = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        parents_ = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            parents_[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pu = Find(u);</span><br><span class="line">        <span class="keyword">int</span> pv = Find(v);</span><br><span class="line">        <span class="keyword">if</span>(pu == pv) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(ranks_[pu] &gt; ranks_[pv])</span><br><span class="line">            parents_[pv] = pu;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ranks_[pu] &lt; ranks_[pv])</span><br><span class="line">            parents_[pu] = pv;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            parents_[pv] = pu;</span><br><span class="line">            ranks_[pu] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(u != parents_[u])</span><br><span class="line">            parents_[u] = Find(parents_[u]);</span><br><span class="line">        <span class="keyword">return</span> parents_[u];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; parents_;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ranks_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
