@@ -152,6 +152,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux命令行(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(1)/">Linux命令行(1)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(1)/" class="archive-article-date">
+  	<time datetime="2020-08-24T08:28:10.944Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="初来乍到"><a href="#初来乍到" class="headerlink" title="初来乍到"></a>初来乍到</h2><h4 id="1-echo"><a href="#1-echo" class="headerlink" title="1. echo"></a>1. echo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> huahua</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$HOME</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-cd"><a href="#2-cd" class="headerlink" title="2. cd"></a>2. cd</h4><h4 id="3-pwd-print-working-directory"><a href="#3-pwd-print-working-directory" class="headerlink" title="3. pwd (print working directory)"></a>3. pwd (print working directory)</h4><h4 id="4-ls"><a href="#4-ls" class="headerlink" title="4. ls"></a>4. ls</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l <span class="comment">#list mode</span></span><br><span class="line">$ ls -l -a = ls -la <span class="comment">#list + all files</span></span><br><span class="line">$ ls -lh <span class="comment">#list + human readable size</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="寻求帮助"><a href="#寻求帮助" class="headerlink" title="寻求帮助"></a>寻求帮助</h2><h4 id="1-man-manual"><a href="#1-man-manual" class="headerlink" title="1. man (manual)"></a>1. man (manual)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ man <span class="built_in">pwd</span></span><br><span class="line">$ man man</span><br></pre></td></tr></table></figure>
+<h4 id="2-命令-h-内置帮助文件"><a href="#2-命令-h-内置帮助文件" class="headerlink" title="2. 命令 -h 内置帮助文件"></a>2. 命令 -h 内置帮助文件</h4><h2 id="文件内容"><a href="#文件内容" class="headerlink" title="文件内容"></a>文件内容</h2><h4 id="1-cat-concatenate-and-print-file-–-打印文件内容"><a href="#1-cat-concatenate-and-print-file-–-打印文件内容" class="headerlink" title="1. cat (concatenate and print file – 打印文件内容)"></a>1. cat (concatenate and print file – 打印文件内容)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat a.txt</span><br><span class="line">$ cat a.txt b.txt <span class="comment"># print a.txt and then b.txt</span></span><br><span class="line">$ cat &lt; a.txt <span class="comment"># read from stdin</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-head-tail-头和尾"><a href="#2-head-tail-头和尾" class="headerlink" title="2. head / tail (头和尾)"></a>2. head / tail (头和尾)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ head a.txt <span class="comment"># 默认打印前10行</span></span><br><span class="line">$ tail a.txt / tail -n 5 a.txt</span><br></pre></td></tr></table></figure>
+<h4 id="3-less-交互式模式"><a href="#3-less-交互式模式" class="headerlink" title="3. less (交互式模式)"></a>3. less (交互式模式)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ less a.txt</span><br></pre></td></tr></table></figure>
+<h4 id="4-grep-查找"><a href="#4-grep-查找" class="headerlink" title="4. grep (查找)"></a>4. grep (查找)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat a.txt | grep aaa </span><br></pre></td></tr></table></figure>
+<h4 id="4-wc-word-line-and-byte-count"><a href="#4-wc-word-line-and-byte-count" class="headerlink" title="4. wc (word, line and byte count)"></a>4. wc (word, line and byte count)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat a.txt | wc</span><br></pre></td></tr></table></figure>
+
+<h2 id="重定向和管道"><a href="#重定向和管道" class="headerlink" title="重定向和管道"></a>重定向和管道</h2><h4 id="1-重定向：改变输入输出设备"><a href="#1-重定向：改变输入输出设备" class="headerlink" title="1. 重定向：改变输入输出设备"></a>1. 重定向：改变输入输出设备</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> hello &gt; hello.txt <span class="comment"># redirect to a file</span></span><br><span class="line">$ <span class="built_in">echo</span> world &gt;&gt; hello.txt <span class="comment"># append to a file</span></span><br><span class="line">$ cat &lt; hello.txt <span class="comment"># use file as stdin = read from file</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-管道：将前一个命令的标准输出作为下一个命令的标准输入"><a href="#2-管道：将前一个命令的标准输出作为下一个命令的标准输入" class="headerlink" title="2. 管道：将前一个命令的标准输出作为下一个命令的标准输入"></a>2. 管道：将前一个命令的标准输出作为下一个命令的标准输入</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ man less | grep sim</span><br><span class="line">$ man less | grep -n sim | grep That &gt; that.txt <span class="comment">#multiple pipes</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(1)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Test_BuildLog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
