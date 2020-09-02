@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>vptr与vtbl.MD | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态绑定 C++的编译器在看到函数被调用时，将会考量是动态绑定（dynamic binding）或静态绑定（static binding）。 静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）有虚函数（3）向上转型：以父类指针指向子类。 实现方式 在有虚函数的类中，数据的第一个位置将会维护一个虚指针（vptr）指向该类的虚表（vtbl）。">
+  <meta name="description" content="动态绑定与虚指针以及虚表动态绑定 C++的编译器在看到函数被调用时，将会考量是动态绑定（dynamic binding）或静态绑定（static binding）。 静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）调用虚函数（3）向上转型：以父类指针指向子类。 实现方式 在有虚函数的类中，数据的第一个位置将会维护一个虚指针（vptr）指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vptr与vtbl.MD">
 <meta property="og:url" content="http://yoursite.com/2020/09/02/vptr%E4%B8%8Evtbl-MD/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="动态绑定 C++的编译器在看到函数被调用时，将会考量是动态绑定（dynamic binding）或静态绑定（static binding）。 静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）有虚函数（3）向上转型：以父类指针指向子类。 实现方式 在有虚函数的类中，数据的第一个位置将会维护一个虚指针（vptr）指向该类的虚表（vtbl）。">
+<meta property="og:description" content="动态绑定与虚指针以及虚表动态绑定 C++的编译器在看到函数被调用时，将会考量是动态绑定（dynamic binding）或静态绑定（static binding）。 静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）调用虚函数（3）向上转型：以父类指针指向子类。 实现方式 在有虚函数的类中，数据的第一个位置将会维护一个虚指针（vptr）指">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/source/_posts/vptr%E4%B8%8Evtbl-MD/vptr_and_vtbl.png">
 <meta property="article:published_time" content="2020-09-02T07:39:25.000Z">
-<meta property="article:modified_time" content="2020-09-02T08:02:25.409Z">
+<meta property="article:modified_time" content="2020-09-02T08:18:00.103Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -177,9 +177,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>动态绑定</strong></p>
+        <h2 id="动态绑定与虚指针以及虚表"><a href="#动态绑定与虚指针以及虚表" class="headerlink" title="动态绑定与虚指针以及虚表"></a>动态绑定与虚指针以及虚表</h2><p><strong>动态绑定</strong></p>
 <p>C++的编译器在看到函数被调用时，将会考量是动态绑定（dynamic binding）或静态绑定（static binding）。</p>
-<p>静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）有虚函数（3）向上转型：以父类指针指向子类。</p>
+<p>静态绑定将绑定函数地址（call xxx &lt;- 函数地址），动态绑定有三个条件：（1）通过指针调用（2）调用虚函数（3）向上转型：以父类指针指向子类。</p>
 <p><strong>实现方式</strong></p>
 <p>在有虚函数的类中，数据的第一个位置将会维护一个虚指针（vptr）指向该类的虚表（vtbl）。在子类重写父类的虚函数时，子类维护的虚表中，被重写的函数地址将被覆盖为子类重写之后的函数地址。</p>
 <p>编译器判断为动态绑定后，将通过子类的虚指针（vptr）查找虚表（vtbl）调用响应重写后的函数。</p>
