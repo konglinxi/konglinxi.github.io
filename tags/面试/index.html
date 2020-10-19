@@ -6,19 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Linux命令行(2) | Hexo</title>
+  <title>Tag: 面试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运行脚本1. 栗子(1) python脚本 123456789$ cat my_echo.pyimport sysdef main()  print(&amp;#x27; &amp;#x27; .join(sys.argv[1:]))if __name__ &#x3D;&#x3D; &amp;#x27;__main__&amp;#x27;:  main()$ python3 my_echo.py hello world!hello world!">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux命令行(2)">
-<meta property="og:url" content="http://yoursite.com/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="运行脚本1. 栗子(1) python脚本 123456789$ cat my_echo.pyimport sysdef main()  print(&amp;#x27; &amp;#x27; .join(sys.argv[1:]))if __name__ &#x3D;&#x3D; &amp;#x27;__main__&amp;#x27;:  main()$ python3 my_echo.py hello world!hello world!">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-24T13:32:12.095Z">
-<meta property="article:modified_time" content="2020-08-27T05:19:37.394Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -155,199 +150,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux命令行(2)" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Linux命令行(2)
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/10/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2020-10-19T14:54:50.783Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/10/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/">面试题目总结</a>
     </h1>
   
 
-        
-        <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/" class="archive-article-date">
-  	<time datetime="2020-08-24T13:32:12.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><h4 id="1-栗子"><a href="#1-栗子" class="headerlink" title="1. 栗子"></a>1. 栗子</h4><p>(1) python脚本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br><span class="line"></span><br><span class="line">$ python3 my_echo.py hello world!</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-
-<p>(2) 向python脚本添加指定解释器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line"><span class="meta">#!/usr/bin/env python3</span></span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
-
-<p>(3) 其他操作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x my_echo.py <span class="comment"># 增加可执行权限</span></span><br><span class="line">$ ./my_echo.py hello world! <span class="comment"># 运行脚本</span></span><br><span class="line">hello world!</span><br><span class="line"></span><br><span class="line">$ mv my_echo.py my_echo <span class="comment"># 移动文件（改名）</span></span><br><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span> <span class="comment"># 将当前路径添加到系统路径</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">which</span> my_echo <span class="comment"># 查找my_echo位置</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-usr-bin-env-python3"><a href="#2-usr-bin-env-python3" class="headerlink" title="2. #!/usr/bin/env python3"></a>2. #!/usr/bin/env python3</h4><p>(1) Shebang: #! 使用哪个解释器解释脚本，放在第一行，并且是绝对路径</p>
-<blockquote>
-<p>#!/bin/sh<br>#!/bin/bash<br>#!/usr/bin/perl<br>#!/usr/bin/php  </p>
-</blockquote>
-<p>(2) chmod (change mode)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x foo <span class="comment"># 添加可执行权限</span></span><br><span class="line">$ chmod -x foo <span class="comment"># 移除可执行权限</span></span><br><span class="line">$ chmod 740 foo <span class="comment"># 修改可执行权限为740  </span></span><br><span class="line"></span><br><span class="line">  common：  </span><br><span class="line">  644 -rw-r--r--  <span class="comment"># default  </span></span><br><span class="line">  755 -rwx-xr-x  </span><br><span class="line">  777 -rwxrwxrwx  <span class="comment"># 危险！use chown/chgrp instead</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 3. 文件基本操作</span></span><br><span class="line">(1) mv (move -- 重命名， 剪切+粘贴)</span><br><span class="line">```bash</span><br><span class="line">$ mv hell.txt hello.txt <span class="comment"># 重命名</span></span><br><span class="line">$ mv toffel /english/ <span class="comment"># 移动文件夹</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">(2) cp (copy -- 复制)</span><br><span class="line">```bash</span><br><span class="line">$ cp -r dir1 dir2 <span class="comment"># 复制文件夹</span></span><br></pre></td></tr></table></figure>
-
-<p>(3) rm(remove – 没有回收站)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -r dir <span class="comment"># 删除文件夹</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-PATH"><a href="#4-PATH" class="headerlink" title="4. $PATH"></a>4. $PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>which: locate a program file in user’s path</p>
-</blockquote>
-<h4 id="5-娱乐"><a href="#5-娱乐" class="headerlink" title="5. 娱乐"></a>5. 娱乐</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes <span class="comment"># 一直输出yes</span></span><br><span class="line">$ yes | sudo spt-get install ... <span class="comment"># 跳过用户确认</span></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Linux命令行(3)
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(1)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Linux命令行(1)</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -370,9 +226,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

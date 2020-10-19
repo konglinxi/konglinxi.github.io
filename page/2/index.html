@@ -152,6 +152,289 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode_684" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/25/leetcode_684/">leetcode_684</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/25/leetcode_684/" class="archive-article-date">
+  	<time datetime="2020-08-25T05:34:38.639Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="leetcode-684"><a href="#leetcode-684" class="headerlink" title="leetcode_684"></a>leetcode_684</h2><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><p>对每一条边[u, v]，使用DFS来检查[u, v]有没有联通，每次操作复杂度为O(n)，所以总时间复杂度为O(n^2).  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findRedundantConnection</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; graph;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp; edge : edges) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> u = edge[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> v = edge[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; visited;</span><br><span class="line">            <span class="keyword">if</span>(hasPath(u, v, graph, visited))</span><br><span class="line">                <span class="keyword">return</span> edge;</span><br><span class="line"></span><br><span class="line">            graph[u].push_back(v);</span><br><span class="line">            graph[v].push_back(u);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;     </span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">int</span> curr, <span class="keyword">int</span> goal, <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt;&amp; visited)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr == goal) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        visited.insert(curr);</span><br><span class="line">        <span class="keyword">if</span>(!graph.count(curr) || !graph.count(goal)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> next : graph.at(curr)) &#123;</span><br><span class="line">            <span class="keyword">if</span>(visited.count(next)) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(hasPath(next, goal, graph, visited)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;  </span><br></pre></td></tr></table></figure>
+
+<h4 id="UnionFind"><a href="#UnionFind" class="headerlink" title="UnionFind"></a>UnionFind</h4><p>并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。常在使用中以森林来表示。</p>
+<blockquote>
+<p>Union-Find 实现功能<br>Find(x): find the root/cluster-id of x<br>Union(x, y): merge two clusters<br>PathCompression: 路径压缩</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findRedundantConnection</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">parents</span><span class="params">(edges.<span class="built_in">size</span>()+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sizes</span><span class="params">(edges.<span class="built_in">size</span>()+<span class="number">1</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; edge : edges) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> u = edge[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> v = edge[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(!parents[u]) parents[u] = u;</span><br><span class="line">            <span class="keyword">if</span>(!parents[v]) parents[v] = v;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> pu = <span class="built_in">find</span>(u, parents);</span><br><span class="line">            <span class="keyword">int</span> pv = <span class="built_in">find</span>(v, parents);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// have same root</span></span><br><span class="line">            <span class="keyword">if</span> (pu == pv) <span class="keyword">return</span> edge;</span><br><span class="line">            <span class="comment">// union</span></span><br><span class="line">            <span class="keyword">if</span> (sizes[pv] &gt; sizes[pu])</span><br><span class="line">                swap(pu, pv);</span><br><span class="line">            parents[pv] = pu;</span><br><span class="line">            sizes[pu] += sizes[pv];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> node, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; parents)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(node != parents[node]) &#123;</span><br><span class="line">            parents[node] = parents[parents[node]];</span><br><span class="line">            node = parents[node];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// while (node != root) &#123;</span></span><br><span class="line">        <span class="comment">//     int tmp = parents[node];</span></span><br><span class="line">        <span class="comment">//     parents[node] = root;</span></span><br><span class="line">        <span class="comment">//     node = tmp;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/25/leetcode_684/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux命令行(3)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/">Linux命令行(3)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/" class="archive-article-date">
+  	<time datetime="2020-08-24T14:17:56.383Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h4 id="1-stress-给系统增加负载或者进行压力测试"><a href="#1-stress-给系统增加负载或者进行压力测试" class="headerlink" title="1. stress (给系统增加负载或者进行压力测试)"></a>1. stress (给系统增加负载或者进行压力测试)</h4><blockquote>
+<p>-t/–timeout N  # N秒后超时<br>-c/–cpu N      # 孵化N个worker， 死循环sqrt() / CPU<br>-i/–io N       # 孵化N个worker， 死循环sync() / IO<br>-m/–vm N       # 孵化N个worker， 死循环malloc() / free() / Memory<br>-d/–hdd N      # 孵化N个worker， 死循环write() / unlink() / Disk</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例</span></span><br><span class="line">stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-top-显示或更新排序过的进程信息"><a href="#2-top-显示或更新排序过的进程信息" class="headerlink" title="2. top (显示或更新排序过的进程信息)"></a>2. top (显示或更新排序过的进程信息)</h4><p>默认按照cpu占用率排序</p>
+<h4 id="3-ps-process-status"><a href="#3-ps-process-status" class="headerlink" title="3. ps (process status)"></a>3. ps (process status)</h4><p>列出当前所有进程，默认只显示当前用户有控制终端的进程。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux <span class="comment"># 显示当前所有进程，包括其他用户的</span></span><br><span class="line">$ ps aux | grep -i chrome | wc -l <span class="comment"># 看一看Chrome起了多少个进程</span></span><br><span class="line">$ ps -l <span class="comment"># 列出PPID等</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-kill-amp-killall"><a href="#4-kill-amp-killall" class="headerlink" title="4. kill &amp; killall"></a>4. kill &amp; killall</h4><p>(1) kill  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> -signal-number/-signal_name PID</span><br><span class="line">$ <span class="built_in">kill</span> PID <span class="comment"># 默认发送15/TERM(software termination signal)</span></span><br><span class="line">$ <span class="built_in">kill</span> -9/-KILL PID <span class="comment"># 强力杀进程</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) killall (按照名字杀进程)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ killall stress</span><br><span class="line">$ killall python <span class="comment"># 名字常见可能误伤</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="5-Ctrl-C-vs-Ctrl-Z"><a href="#5-Ctrl-C-vs-Ctrl-Z" class="headerlink" title="5. Ctrl+C vs Ctrl+Z"></a>5. Ctrl+C vs Ctrl+Z</h4><p>都能让程序“停止”，但Ctrl+C向进程发送SIGINT中断信号，通常进程会终止；Ctrl+Z向进程发送SIGTSTP信号，把前台进程放入后台并挂起，此时：（1）进程仍然存在（2）打开的端口还会被占用</p>
+<h4 id="6-amp-jobs-fg-foreground-bg-background"><a href="#6-amp-jobs-fg-foreground-bg-background" class="headerlink" title="6. &amp; / jobs / fg (foreground) / bg (background)"></a>6. &amp; / jobs / fg (foreground) / bg (background)</h4><p>(1) &amp; (在后台运行进程)   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m http.server &amp; <span class="comment"># 在后台起一个web server</span></span><br></pre></td></tr></table></figure>
+<p>(2) jobs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">jobs</span> <span class="comment"># 显示从当前终端启动的命令</span></span><br><span class="line">$ <span class="built_in">jobs</span> -l <span class="comment"># 显示PID</span></span><br></pre></td></tr></table></figure>
+<p>(3) fg (foreground)  </p>
+<pre><code class="bash">$ fg %1 # 把job1号放到前台开始运行</code></pre>
+<p>(4) bg (background) </p>
+<pre><code class="bash">$ stress -c 1
+$ Ctrl+Z # 挂起当前进程放入后台
+$ bg # 继续被挂起的后台进程</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux命令行(2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/">Linux命令行(2)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/" class="archive-article-date">
+  	<time datetime="2020-08-24T13:32:12.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><h4 id="1-栗子"><a href="#1-栗子" class="headerlink" title="1. 栗子"></a>1. 栗子</h4><p>(1) python脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br><span class="line"></span><br><span class="line">$ python3 my_echo.py hello world!</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+
+<p>(2) 向python脚本添加指定解释器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line"><span class="meta">#!/usr/bin/env python3</span></span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+
+<p>(3) 其他操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x my_echo.py <span class="comment"># 增加可执行权限</span></span><br><span class="line">$ ./my_echo.py hello world! <span class="comment"># 运行脚本</span></span><br><span class="line">hello world!</span><br><span class="line"></span><br><span class="line">$ mv my_echo.py my_echo <span class="comment"># 移动文件（改名）</span></span><br><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span> <span class="comment"># 将当前路径添加到系统路径</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">which</span> my_echo <span class="comment"># 查找my_echo位置</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-usr-bin-env-python3"><a href="#2-usr-bin-env-python3" class="headerlink" title="2. #!/usr/bin/env python3"></a>2. #!/usr/bin/env python3</h4><p>(1) Shebang: #! 使用哪个解释器解释脚本，放在第一行，并且是绝对路径</p>
+<blockquote>
+<p>#!/bin/sh<br>#!/bin/bash<br>#!/usr/bin/perl<br>#!/usr/bin/php  </p>
+</blockquote>
+<p>(2) chmod (change mode)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x foo <span class="comment"># 添加可执行权限</span></span><br><span class="line">$ chmod -x foo <span class="comment"># 移除可执行权限</span></span><br><span class="line">$ chmod 740 foo <span class="comment"># 修改可执行权限为740  </span></span><br><span class="line"></span><br><span class="line">  common：  </span><br><span class="line">  644 -rw-r--r--  <span class="comment"># default  </span></span><br><span class="line">  755 -rwx-xr-x  </span><br><span class="line">  777 -rwxrwxrwx  <span class="comment"># 危险！use chown/chgrp instead</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 3. 文件基本操作</span></span><br><span class="line">(1) mv (move -- 重命名， 剪切+粘贴)</span><br><span class="line">```bash</span><br><span class="line">$ mv hell.txt hello.txt <span class="comment"># 重命名</span></span><br><span class="line">$ mv toffel /english/ <span class="comment"># 移动文件夹</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">(2) cp (copy -- 复制)</span><br><span class="line">```bash</span><br><span class="line">$ cp -r dir1 dir2 <span class="comment"># 复制文件夹</span></span><br></pre></td></tr></table></figure>
+
+<p>(3) rm(remove – 没有回收站)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -r dir <span class="comment"># 删除文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-PATH"><a href="#4-PATH" class="headerlink" title="4. $PATH"></a>4. $PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>which: locate a program file in user’s path</p>
+</blockquote>
+<h4 id="5-娱乐"><a href="#5-娱乐" class="headerlink" title="5. 娱乐"></a>5. 娱乐</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes <span class="comment"># 一直输出yes</span></span><br><span class="line">$ yes | sudo spt-get install ... <span class="comment"># 跳过用户确认</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux命令行(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -438,6 +721,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Linux命令行(2) | Hexo</title>
+  <title>关系型数据库--MySQL(1) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运行脚本1. 栗子(1) python脚本 123456789$ cat my_echo.pyimport sysdef main()  print(&amp;#x27; &amp;#x27; .join(sys.argv[1:]))if __name__ &#x3D;&#x3D; &amp;#x27;__main__&amp;#x27;:  main()$ python3 my_echo.py hello world!hello world!">
+  <meta name="description" content="关系型数据库是指以关系模型来组织数据的数据库，关系模型可以理解为二维表格，一个关系型数据库就是由二维表格组成的数据组织。关系型数据库的特点有： 常用管理语句： 123CREATE DATABASE test_db;USE DATABASE test_db;CREATE TABLE test_tbl;    键值数据库（key-value）: redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux命令行(2)">
-<meta property="og:url" content="http://yoursite.com/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/index.html">
+<meta property="og:title" content="关系型数据库--MySQL(1)">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL-1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="运行脚本1. 栗子(1) python脚本 123456789$ cat my_echo.pyimport sysdef main()  print(&amp;#x27; &amp;#x27; .join(sys.argv[1:]))if __name__ &#x3D;&#x3D; &amp;#x27;__main__&amp;#x27;:  main()$ python3 my_echo.py hello world!hello world!">
+<meta property="og:description" content="关系型数据库是指以关系模型来组织数据的数据库，关系模型可以理解为二维表格，一个关系型数据库就是由二维表格组成的数据组织。关系型数据库的特点有： 常用管理语句： 123CREATE DATABASE test_db;USE DATABASE test_db;CREATE TABLE test_tbl;    键值数据库（key-value）: redis">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-24T13:32:12.095Z">
-<meta property="article:modified_time" content="2020-08-27T05:19:37.394Z">
+<meta property="article:published_time" content="2020-09-03T02:04:10.000Z">
+<meta property="article:modified_time" content="2020-09-03T07:26:24.797Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -155,50 +154,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux命令行(2)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关系型数据库-MySQL-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Linux命令行(2)
+      关系型数据库--MySQL(1)
     </h1>
   
 
         
-        <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/" class="archive-article-date">
-  	<time datetime="2020-08-24T13:32:12.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
+        <a href="/2020/09/03/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL-1/" class="archive-article-date">
+  	<time datetime="2020-09-03T02:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><h4 id="1-栗子"><a href="#1-栗子" class="headerlink" title="1. 栗子"></a>1. 栗子</h4><p>(1) python脚本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br><span class="line"></span><br><span class="line">$ python3 my_echo.py hello world!</span><br><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+        <p>关系型数据库是指以关系模型来组织数据的数据库，关系模型可以理解为二维表格，一个关系型数据库就是由二维表格组成的数据组织。关系型数据库的特点有：</p>
+<p>常用管理语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> test_db;</span><br><span class="line"><span class="keyword">USE</span> <span class="keyword">DATABASE</span> test_db;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test_tbl; </span><br></pre></td></tr></table></figure>
 
-<p>(2) 向python脚本添加指定解释器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat my_echo.py</span><br><span class="line"><span class="meta">#!/usr/bin/env python3</span></span><br><span class="line">import sys</span><br><span class="line">def main()</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27; &#x27;</span> .join(sys.argv[1:]))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
 
-<p>(3) 其他操作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x my_echo.py <span class="comment"># 增加可执行权限</span></span><br><span class="line">$ ./my_echo.py hello world! <span class="comment"># 运行脚本</span></span><br><span class="line">hello world!</span><br><span class="line"></span><br><span class="line">$ mv my_echo.py my_echo <span class="comment"># 移动文件（改名）</span></span><br><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span> <span class="comment"># 将当前路径添加到系统路径</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">which</span> my_echo <span class="comment"># 查找my_echo位置</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-usr-bin-env-python3"><a href="#2-usr-bin-env-python3" class="headerlink" title="2. #!/usr/bin/env python3"></a>2. #!/usr/bin/env python3</h4><p>(1) Shebang: #! 使用哪个解释器解释脚本，放在第一行，并且是绝对路径</p>
-<blockquote>
-<p>#!/bin/sh<br>#!/bin/bash<br>#!/usr/bin/perl<br>#!/usr/bin/php  </p>
-</blockquote>
-<p>(2) chmod (change mode)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x foo <span class="comment"># 添加可执行权限</span></span><br><span class="line">$ chmod -x foo <span class="comment"># 移除可执行权限</span></span><br><span class="line">$ chmod 740 foo <span class="comment"># 修改可执行权限为740  </span></span><br><span class="line"></span><br><span class="line">  common：  </span><br><span class="line">  644 -rw-r--r--  <span class="comment"># default  </span></span><br><span class="line">  755 -rwx-xr-x  </span><br><span class="line">  777 -rwxrwxrwx  <span class="comment"># 危险！use chown/chgrp instead</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 3. 文件基本操作</span></span><br><span class="line">(1) mv (move -- 重命名， 剪切+粘贴)</span><br><span class="line">```bash</span><br><span class="line">$ mv hell.txt hello.txt <span class="comment"># 重命名</span></span><br><span class="line">$ mv toffel /english/ <span class="comment"># 移动文件夹</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">(2) cp (copy -- 复制)</span><br><span class="line">```bash</span><br><span class="line">$ cp -r dir1 dir2 <span class="comment"># 复制文件夹</span></span><br></pre></td></tr></table></figure>
-
-<p>(3) rm(remove – 没有回收站)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -r dir <span class="comment"># 删除文件夹</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-PATH"><a href="#4-PATH" class="headerlink" title="4. $PATH"></a>4. $PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="variable">$PATH</span>=<span class="variable">$PATH</span>:<span class="variable">$PWD</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>which: locate a program file in user’s path</p>
-</blockquote>
-<h4 id="5-娱乐"><a href="#5-娱乐" class="headerlink" title="5. 娱乐"></a>5. 娱乐</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes <span class="comment"># 一直输出yes</span></span><br><span class="line">$ yes | sudo spt-get install ... <span class="comment"># 跳过用户确认</span></span><br></pre></td></tr></table></figure>
+<p>键值数据库（key-value）: redis</p>
 
       
 
@@ -228,17 +209,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -289,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(2)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/03/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,18 +273,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(3)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/03/%E8%99%9A%E5%AD%98%E6%8A%80%E6%9C%AF/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Linux命令行(3)
+          虚存技术
         
       </div>
     </a>
   
   
-    <a href="/2020/08/24/linux%E5%91%BD%E4%BB%A4%E8%A1%8C(1)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Linux命令行(1)</div>
+    <a href="/2020/09/02/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E3%80%81%E6%8B%B7%E8%B4%9D%E8%B5%8B%E5%80%BC%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">拷贝构造、拷贝赋值和析构函数</div>
       <i class="icon-circle-right"></i>
     </a>
   
